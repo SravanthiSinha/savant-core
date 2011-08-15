@@ -1,0 +1,20 @@
+import com.google.inject.Inject
+import org.savantbuild.dep.DependencyManager
+
+@Inject DependencyManager dm
+
+project(group: "org.savantbuild.plugins", name: "plugin", version: "0.1") {
+  plugin(group: "org.savantbuild.plugins", name: "clean", version: "0.1")
+  publication(name: "${project.name}", type: "jar", file: "target/jars/${project.name}-${project.version}.jar")
+}
+
+target("jar", description: "Create the JAR and distribution") << {
+  ant.mkdir(dir: "target/jars")
+  ant.jar(jarfile: "target/jars/${project.name}-${project.version}.jar") {
+    fileset(dir: "src/groovy/main", includes: "**/*")
+  }
+}
+
+target("int", dependsOn: "jar", description: "Publishes an integration build") << {
+  dm.publisher.publish(project, project.publications, project.integrationWorkflow, true)
+}

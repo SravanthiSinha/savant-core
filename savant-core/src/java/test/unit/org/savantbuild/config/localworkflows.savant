@@ -1,0 +1,10 @@
+workflow {
+  fetchProcesses {
+    process(type: "cache", dir: "test-deps/savant")
+    process(type: "cache", dir: "test-deps/plugins")
+  }
+
+  publishProcesses {
+    process(type: "cache", dir: "target/test/deps")
+  }
+}

@@ -1,0 +1,3 @@
+target("clean", description: "Deletes the intermediate files (the target directory)") << {
+  ant.delete(dir: "target")
+}

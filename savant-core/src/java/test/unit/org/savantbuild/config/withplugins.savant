@@ -1,0 +1,45 @@
+import com.google.inject.Inject
+import org.savantbuild.run.output.Output
+
+@Inject Output output
+
+project(group: "org.savantbuild.test", name: "savant-core-test", version: "2.0-A1") {
+  plugin(group: "org.savantbuild.plugins", name: "java", version: "1.0")
+  plugin(group: "org.savantbuild.plugins", name: "groovy", version: "1.0")
+}
+
+// This should override the implicit compile target
+target("compile") << {
+  target("groovy:compile").run()
+  target("java:compile").run()
+}
+
+// Pre-hooks
+target("compile").pre << {
+  output.info("Pre compiling")
+}
+
+// Post-hook
+target("compile").post << {
+  output.info("Post compiling")
+}
+
+// Pre-hook
+target("java:compile").pre << {
+  output.info("Pre Java compiling")
+}
+
+// Post-hook
+target("java:compile").post << {
+  output.info("Post Java compiling")
+}
+
+// Pre-hook
+target("java:jar").pre << {
+  output.info("Pre Java jaring")
+}
+
+// Post-hook
+target("java:jar").post << {
+  output.info("Post Java jaring")
+}

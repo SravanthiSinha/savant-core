@@ -1,0 +1,9 @@
+import com.google.inject.Inject
+import org.savantbuild.run.output.Output
+
+@Inject Output output
+
+project(group: "org.savantbuild.test", name: "savant-core-test", version: "2.0-A1") {
+  plugin(group: "org.savantbuild.plugins", name: "java", version: "1.0")
+  plugin(group: "org.savantbuild.duplicates", name: "java", version: "1.0")
+}

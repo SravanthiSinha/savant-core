@@ -1,0 +1,34 @@
+workflow {
+  fetchProcesses {
+    process(type: "cache")
+    process(type: "url", url: "http://repository.savantbuild.org")
+  }
+
+  publishProcesses {
+    process(type: "cache")
+  }
+}
+
+workflow("com.example") {
+  fetchProcesses {
+    process(type: "cache")
+    process(type: "url", url: "http://repository.savantbuild.org")
+    process(type: "url", url: "https://secure.mycompany.com", username: "frank", password: "sinatra")
+  }
+
+  publishProcesses {
+    process(type: "cache")
+  }
+}
+
+integrationWorkflow {
+  process(type: "cache")
+}
+
+releaseWorkflow("org.opensource") {
+  process(type: "svn", repository: "https://svn.savantbuild.org/savant-repository", username: "frank", password: "sinatra")
+}
+
+releaseWorkflow("com.example") {
+  process(type: "svn", repository: "https://svn.mycompany.com/savant-repository", username: "frank", password: "sinatra")
+}

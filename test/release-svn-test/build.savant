@@ -1,0 +1,52 @@
+project(name: "release-svn-test", group: "org.savantbuild.test", version: "2.2") {
+  plugin(group: "org.savantbuild.plugins", name: "clean", version: "0.1")
+  plugin(group: "org.savantbuild.plugins", name: "integration", version: "0.1")
+  plugin(group: "org.savantbuild.plugins", name: "release-svn", version: "0.1")
+
+  publication(name: "${project.name}", type: "jar", file: "target/jars/${project.name}-${project.version}.jar")
+
+  dependencies {
+    artifactGroup("test-compile") {
+      artifact(group: "org.testng", name: "testng", version: "5.11")
+    }
+  }
+}
+
+target("compile", description: "Compile the java") << {
+  ant.mkdir(dir: "target/classes/main")
+  ant.javac(srcdir: "src/java/main", destdir: "target/classes/main", target: "1.6", source: "1.6", includeantruntime: "false")
+
+  ant.dependencypath(pathid: "classpath.test", types: "test-compile", transitive: "false")
+  ant.mkdir(dir: "target/classes/test/unit")
+  ant.javac(srcdir: "src/java/test/unit", destdir: "target/classes/test/unit", target: "1.6", source: "1.6", includeantruntime: "false") {
+    classpath {
+      pathelement(path: "target/classes/main")
+      path(refid: "classpath.test")
+    }
+  }
+}
+
+target("pkg", dependsOn: "compile", description: "Create the JAR and distribution") << {
+  ant.mkdir(dir: "target/jars")
+  ant.jar(jarfile: "target/jars/${project.name}-${project.version}.jar") {
+    fileset(dir: "target/classes/main", includes: "**/*")
+  }
+}
+
+target("test", dependsOn: "pkg", description: "Runs the tests") << {
+  ant.taskdef(resource: "testngtasks", classpathref: "classpath.test")
+  ant.testng(enableAssert: "true", failureProperty: "testng.failed", outputDir: "target/test/") {
+    classpath {
+      path {
+        fileset(dir: "target/jars", includes: "*.jar")
+      }
+      path(refid: "classpath.test")
+      path(location: "target/classes/test/unit")
+    }
+    classfileset(dir: "target/classes/test/unit", includes: "**/*Test.class")
+  }
+
+  if (ant.project.properties["testng.failed"]) {
+    ant.fail("Tests failed.")
+  }
+}

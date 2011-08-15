@@ -1,0 +1,6 @@
+target("pkg", description: "Creates the Plugin JAR file") << {
+  ant.mkdir(dir: "target/jars")
+  ant.jar(jarfile: "target/jars/${project.name}-${project.version}.jar") {
+    fileset(dir: "src/groovy/main", includes: "**/*")
+  }
+}

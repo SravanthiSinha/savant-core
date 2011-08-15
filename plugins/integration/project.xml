@@ -1,0 +1,8 @@
+<project xmlns="http://www.inversoft.org/schemas/savant-1.5/project"
+    name="integration"
+    group="plugins.savantbuild.org"
+    version="0.1">
+
+  <plugin group="plugins.savant.inversoft.org" name="clean" version="1.1.1"/>
+  <plugin group="plugins.savant.inversoft.org" name="release-svn" version="1.0.1"/>
+</project>

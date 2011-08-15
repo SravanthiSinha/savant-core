@@ -1,0 +1,27 @@
+import com.google.inject.Inject
+import org.savantbuild.run.output.Output
+
+@Inject Output output
+
+project(group: "org.savantbuild.test", name: "savant-core-test", version: "2.0-A1") {
+  publication(name: "publication1", type: "jar", file: "target/jars/${project.name}.jar", compatibility: "patch", dependencies: "deps")
+  publication(name: "publication2", type: "xml", file: "target/jars/${project.name}.xml")
+
+  dependencies {
+    artifactGroup("compile") {
+      artifact(group: "org.apache.commons", project: "commons-io", name: "commons-io", version: "1.0")
+    }
+  }
+}
+
+target("simple") << {
+  output.info("Hello world")
+}
+
+target("second", dependsOn: ["simple"]) << {
+  output.info("Hello world")
+}
+
+target("params", params: [param1: [true, "Test description"], param2: [false, "Test description 2"]]) << { params ->
+  output.info("Hello ${params['param1']} ${params['param2']}")
+}
