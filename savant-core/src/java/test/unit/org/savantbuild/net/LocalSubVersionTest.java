@@ -40,6 +40,7 @@ import static org.testng.Assert.*;
  */
 public class LocalSubVersionTest {
 
+
   public static File mockSvnRepositoryRoot = new File("target/mock-svn-repository");
   public static File mockSvnRepositoryTrunk = new File(mockSvnRepositoryRoot, "trunk");
   public static File mockSvnRepositoryBranches = new File(mockSvnRepositoryRoot, "branches");
@@ -53,14 +54,16 @@ public class LocalSubVersionTest {
     try {
       FileUtils.deleteDirectory(mockSvnRepositoryRoot);
       FileUtils.deleteDirectory(mockSvnProject);
-      LocalSubVersion.createRepository(mockSvnRepositoryRoot);
-      LocalSubVersion.makeDirectory(mockSvnRepositoryTrunk);
-      LocalSubVersion.makeDirectory(mockSvnRepositoryBranches);
-      LocalSubVersion.makeDirectory(mockSvnRepositoryBranch_1_0);
-      LocalSubVersion.makeDirectory(mockSvnRepositoryTags);
-      LocalSubVersion.makeDirectory(mockSvnRepositoryTag_1_0_1);
-      LocalSubVersion.checkoutHead(mockSvnRepositoryTrunk, mockSvnProject);
+      SubVersion.createRepository(mockSvnRepositoryRoot);
+      SubVersion subVersion = new SubVersion(repositoryPathToString(mockSvnRepositoryRoot));
+      subVersion.mkdir(mockSvnRepositoryTrunk);
+      subVersion.mkdir(mockSvnRepositoryBranches);
+      subVersion.mkdir(mockSvnRepositoryBranch_1_0);
+      subVersion.mkdir(mockSvnRepositoryTags);
+      subVersion.mkdir(mockSvnRepositoryTag_1_0_1);
+      subVersion.doCheckout("trunk", mockSvnProject);
     } catch (Exception e) {
+      e.printStackTrace();
       Assert.fail("You must have subversion installed on your system to execute this unit test");
     }
 
@@ -72,7 +75,7 @@ public class LocalSubVersionTest {
    * @param repositoryPath the repository path
    * @return string representing the svn url
    */
-  private String repositoryPathToString(File repositoryPath) {
+  public String repositoryPathToString(File repositoryPath) {
     try {
       return SVNURL.fromFile(repositoryPath).toString();
     } catch (SVNException e) {
@@ -119,9 +122,9 @@ public class LocalSubVersionTest {
     assertEquals(LocalSubVersion.determineRoot(repositoryPathToString(mockSvnRepositoryTag_1_0_1)), repositoryPathToString(mockSvnRepositoryRoot));
   }
 
-  @Test
+  @Test(enabled = true)
   public void status() throws IOException {
-    FileTools.write(new File("src/java/test/unit/org/savantbuild/net/svn-changed.txt"), "" + System.currentTimeMillis());
+    FileTools.write(new File(mockSvnProject, "svn-changed.txt"), "" + System.currentTimeMillis());
 
     final ThreadLocal<File> holder = new ThreadLocal<File>();
     LocalSubVersion.doStatus(mockSvnProject, new StatusHandler() {

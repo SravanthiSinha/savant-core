@@ -18,23 +18,18 @@ package org.savantbuild.net;
 import java.io.File;
 
 import org.savantbuild.BuildException;
-import org.tmatesoft.svn.core.SVNCommitInfo;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNException;
-import org.tmatesoft.svn.core.SVNURL;
 import org.tmatesoft.svn.core.internal.io.dav.DAVRepositoryFactory;
 import org.tmatesoft.svn.core.internal.io.fs.FSRepositoryFactory;
 import org.tmatesoft.svn.core.internal.io.svn.SVNRepositoryFactoryImpl;
 import org.tmatesoft.svn.core.wc.ISVNStatusHandler;
 import org.tmatesoft.svn.core.wc.SVNClientManager;
-import org.tmatesoft.svn.core.wc.SVNCommitClient;
 import org.tmatesoft.svn.core.wc.SVNInfo;
 import org.tmatesoft.svn.core.wc.SVNRevision;
 import org.tmatesoft.svn.core.wc.SVNStatus;
 import org.tmatesoft.svn.core.wc.SVNStatusClient;
-import org.tmatesoft.svn.core.wc.SVNUpdateClient;
 import org.tmatesoft.svn.core.wc.SVNWCClient;
-import org.tmatesoft.svn.core.wc.admin.SVNAdminClient;
 
 /**
  * <p>
@@ -60,51 +55,6 @@ public class LocalSubVersion {
     * For using over file:///
     */
     FSRepositoryFactory.setup();
-  }
-
-  /**
-   * Creates a svn repository
-   *
-   * @param path the path to the repository
-   * @return SVNURL
-   */
-  static SVNURL createRepository(File path) {
-    SVNClientManager clientManager = SVNClientManager.newInstance();
-    SVNAdminClient adminClient = clientManager.getAdminClient();
-    try {
-      return adminClient.doCreateRepository(path, null, true, true);
-    } catch (SVNException e) {
-      throw new BuildException(e);
-    }
-  }
-
-  /**
-   * Makes a svn directory
-   *
-   * @param repositoryPath the repository path
-   * @return SVNCommitInfo
-   * @throws SVNException if error during creationg
-   */
-  static SVNCommitInfo makeDirectory(File repositoryPath) {
-    SVNClientManager clientManager = SVNClientManager.newInstance();
-    SVNCommitClient commitClient = clientManager.getCommitClient();
-    try {
-      SVNURL[] svnurl = new SVNURL[]{SVNURL.fromFile(repositoryPath)};
-      return commitClient.doMkDir(svnurl, "Creating svn directory: " + repositoryPath.getAbsolutePath());
-    } catch (SVNException e) {
-      throw new BuildException(e);
-    }
-  }
-
-  static void checkoutHead(File repositoryPath, File destinationPath) {
-    SVNClientManager clientManager = SVNClientManager.newInstance();
-    try {
-      SVNURL svnurl = SVNURL.fromFile(repositoryPath);
-      SVNUpdateClient updateClient = clientManager.getUpdateClient();
-      updateClient.doCheckout(svnurl, destinationPath, SVNRevision.HEAD, SVNRevision.HEAD, SVNDepth.EMPTY, true);
-    } catch (SVNException e) {
-      throw new BuildException(e);
-    }
   }
 
   /**

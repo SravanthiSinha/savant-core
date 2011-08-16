@@ -18,6 +18,7 @@ package org.savantbuild.net;
 import java.io.File;
 
 import org.savantbuild.BuildException;
+import org.tmatesoft.svn.core.SVNCommitInfo;
 import org.tmatesoft.svn.core.SVNDepth;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNNodeKind;
@@ -34,6 +35,7 @@ import org.tmatesoft.svn.core.wc.SVNCopySource;
 import org.tmatesoft.svn.core.wc.SVNRevision;
 import org.tmatesoft.svn.core.wc.SVNUpdateClient;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
+import org.tmatesoft.svn.core.wc.admin.SVNAdminClient;
 
 /**
  * <p>
@@ -124,6 +126,39 @@ public class SubVersion {
    */
   public boolean isExists() {
     return nodeKind != SVNNodeKind.NONE;
+  }
+
+  /**
+   * Creates a svn repository
+   *
+   * @param path the path to the repository
+   * @return SVNURL
+   */
+  public static SVNURL createRepository(File path) {
+    SVNClientManager clientManager = SVNClientManager.newInstance();
+    SVNAdminClient adminClient = clientManager.getAdminClient();
+    try {
+      return adminClient.doCreateRepository(path, null, true, true);
+    } catch (SVNException e) {
+      throw new BuildException(e);
+    }
+  }
+
+  /**
+   * Makes a svn directory
+   *
+   * @param repositoryPath the repository path
+   * @return SVNCommitInfo
+   */
+  public SVNCommitInfo mkdir(File repositoryPath) {
+    SVNClientManager clientManager = SVNClientManager.newInstance();
+    SVNCommitClient commitClient = clientManager.getCommitClient();
+    try {
+      SVNURL[] svnurl = new SVNURL[]{SVNURL.fromFile(repositoryPath)};
+      return commitClient.doMkDir(svnurl, "Creating svn directory: " + repositoryPath.getAbsolutePath());
+    } catch (SVNException e) {
+      throw new BuildException(e);
+    }
   }
 
   /**
