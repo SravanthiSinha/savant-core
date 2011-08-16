@@ -32,6 +32,7 @@
       <artifact group="ant.apache.org" project="ant" name="ant-launcher" version="1.8.1"/>
       <artifact group="ant.apache.org" name="ant" version="1.8.1"/>
       <artifact group="commons.apache.org" name="commons-cli" version="1.2"/>
+      <artifact group="commons.apache.org" name="commons-io" version="1.4"/>
       <artifact group="groovy.codehaus.org" project="groovy" name="groovy-all" version="1.7.5"/>
       <artifact group="inject.google.com" name="guice" version="3.0"/>
       <artifact group="jsch.jcraft.com" name="jsch" version="0.1.44"/>
