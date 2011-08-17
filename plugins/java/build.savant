@@ -1,7 +1,0 @@
-project(group: "org.savantbuild.plugins", name: "java", version: "0.1") {
-  plugin(group: "org.savantbuild.plugins", name: "clean", version: "0.1")
-  plugin(group: "org.savantbuild.plugins", name: "plugin", version: "0.1")
-  plugin(group: "org.savantbuild.plugins", name: "integration", version: "0.1")
-  plugin(group: "org.savantbuild.plugins", name: "release-svn", version: "0.1")
-  publication(name: "${project.name}", type: "jar", file: "target/jars/${project.name}-${project.version}.jar")
-}
