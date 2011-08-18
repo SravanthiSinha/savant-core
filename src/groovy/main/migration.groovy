@@ -53,8 +53,8 @@ def migrateAmd(File amdFile) {
 
     // save old
     AntBuilder ant = new AntBuilder();
-    ant.copy(file: amdFile, toFile: new File(amdFile.absolutePath + ".old").absolutePath, preservelastmodified: true);
-    ant.copy(file: amdMd5File, toFile: new File(amdMd5File.absolutePath + ".old").absolutePath, preservelastmodified: true);
+    ant.copy(file: amdFile, toFile: new File("${amdFile.absolutePath}.old").absolutePath, preservelastmodified: true);
+    ant.copy(file: amdMd5File, toFile: new File("${amdMd5File.absolutePath}.old").absolutePath, preservelastmodified: true);
 
     String oldXml = amdFile.getText();
 
