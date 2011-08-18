@@ -21,7 +21,7 @@ project(group: "savant.inversoft.org", name: "savant-core", version: "2.0-A2") {
   dependencies {
     artifactGroup("compile") {
       artifact(group: "org.apache.ant", project: "ant", name: "ant-launcher", version: "1.8.1")
-      artifact(group: "ant.apache.org", name: "ant", version: "1.8.1")
+      artifact(group: "org.apache.ant", name: "ant", version: "1.8.1")
       artifact(group: "org.apache.commons", name: "commons-io", version: "1.4")
       artifact(group: "org.apache.commons", name: "commons-cli", version: "1.2")
       artifact(group: "org.codehaus.groovy", project: "groovy", name: "groovy-all", version: "1.7.5")
@@ -31,8 +31,8 @@ project(group: "savant.inversoft.org", name: "savant-core", version: "2.0-A2") {
     }
 
     artifactGroup("test-compile") {
-      artifact(group: "easymock.org", name: "easymock", version: "2.3")
-      artifact(group: "testng.org", name: "testng", version: "5.11")
+      artifact(group: "org.easymock", name: "easymock", version: "2.3")
+      artifact(group: "org.testng", name: "testng", version: "5.11")
     }
   }
 }
