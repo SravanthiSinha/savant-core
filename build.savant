@@ -20,14 +20,14 @@ project(group: "savant.inversoft.org", name: "savant-core", version: "2.0-A2") {
 
   dependencies {
     artifactGroup("compile") {
-      artifact(group: "ant.apache.org", project: "ant", name: "ant-launcher", version: "1.8.1")
+      artifact(group: "org.apache.ant", project: "ant", name: "ant-launcher", version: "1.8.1")
       artifact(group: "ant.apache.org", name: "ant", version: "1.8.1")
-      artifact(group: "commons.apache.org", name: "commons-io", version: "1.4")
-      artifact(group: "commons.apache.org", name: "commons-cli", version: "1.2")
-      artifact(group: "groovy.codehaus.org", project: "groovy", name: "groovy-all", version: "1.7.5")
-      artifact(group: "inject.google.com", name: "guice", version: "3.0")
-      artifact(group: "jsch.jcraft.com", name: "jsch", version: "0.1.44")
-      artifact(group: "svnkit.com", name: "svnkit", version: "1.3.5")
+      artifact(group: "org.apache.commons", name: "commons-io", version: "1.4")
+      artifact(group: "org.apache.commons", name: "commons-cli", version: "1.2")
+      artifact(group: "org.codehaus.groovy", project: "groovy", name: "groovy-all", version: "1.7.5")
+      artifact(group: "com.google.inject", name: "guice", version: "3.0")
+      artifact(group: "com.jcraft.jsch", name: "jsch", version: "0.1.44")
+      artifact(group: "com.svnkit", name: "svnkit", version: "1.3.5")
     }
 
     artifactGroup("test-compile") {
