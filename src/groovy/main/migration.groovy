@@ -1,3 +1,23 @@
+import org.savantbuild.io.FileTools
+import org.savantbuild.io.MD5
+
+/**
+ * Migrates a 1.0 savant repository to 2.0.  The primary migration
+ * is to reverse the old artifact:group format to the new 2.0 format
+ *
+ * This script requires the savant-core jar
+ */
+
+validateArgs();
+
+def validateArgs() {
+  if (args.size() == 0) {
+    println("""You must provide 2 arguments when executing this script.  The first argument
+  is the directory you are migrating from, the second argument is the directory you are migrating to""");
+    System.exit(-1);
+  }
+}
+
 File fromDir = new File(args[0]);
 File toDir = new File(args[1]);
 
@@ -27,7 +47,9 @@ toDir.eachDirRecurse { dir ->
 def migrateAmd(File amdFile) {
   if (amdFile.isFile() && amdFile.getName().endsWith(".amd")) {
 
-    File amdMd5File = new File(amdFile.absolutePath + ".md5");
+    File amdMd5File = new File("${amdFile.absolutePath}.md5");
+
+    println("Migrating ${amdFile.getAbsolutePath()}")
 
     // save old
     AntBuilder ant = new AntBuilder();
@@ -36,11 +58,23 @@ def migrateAmd(File amdFile) {
 
     String oldXml = amdFile.getText();
 
-    String newXml = migrateArtifactGroups(oldXml);
+    println("\nOld XML:");
+    println(oldXml);
 
-    println("\n");
-    println(newXml);
-    println("\n");
+    String bugFixXml = fixCompatTypeBug(oldXml);
+
+    println("\nBug Fixed XML");
+    println(bugFixXml);
+
+    String migratedXml = migrateArtifactGroups(bugFixXml);
+
+    println("\nMigrated XML");
+    println(migratedXml);
+
+    amdFile.write(migratedXml);
+
+    MD5 md5 = FileTools.md5(amdFile);
+    amdMd5File.write(md5.sum);
   }
 }
 
@@ -75,4 +109,22 @@ String migrateArtifactGroups(String oldXml) {
   def writer = new StringWriter()
   new XmlNodePrinter(new PrintWriter(writer)).print(root)
   return writer.toString()
+}
+
+/**
+ * Some old files contained this:
+ *
+ * <artifact-meta-data> compatType="minor">
+ *
+ * This method fixes it
+ *
+ * @param node the root xml node
+ * @return
+ */
+def fixCompatTypeBug(String xml) {
+  return xml.
+          replace("> compatType=\"minor\"", " compatType=\"minor\"").
+          replace("> compatType=\"major\"", " compatType=\"major\"").
+          replace("> compatType=\"patch\"", " compatType=\"patch\"").
+          replace("> compatType=\"identical\"", " compatType=\"identical\"")
 }
