@@ -278,7 +278,7 @@ public class GraphBuilderTest {
     // Including the project node.
     assertEquals(graph.getAllGraphNodesValues().size(), 3);
 
-    Artifact integration = new Artifact("org.savantbuild.test", "integration-build", "integration-build", "2.1.1-{integration}", "jar");
+    Artifact integration = new Artifact("org.savantbuild.test", "", "integration-build", "2.1.1-{integration}", "jar");
     Dependencies artDeps = graph.getDependencies(a);
     assertEquals(artDeps.getArtifactGroups().size(), 1);
     assertEquals(artDeps.getAllArtifacts().size(), 1);
@@ -289,5 +289,56 @@ public class GraphBuilderTest {
     GraphLink<ArtifactID, ArtifactLink> link = node.getInboundLink(graph.getGraphNode(a.getId()));
     assertEquals(link.value.getDependencyVersion(), "2.1.1-{integration}");
     assertEquals(link.value.getDependencyIntegrationVersion(), "2.1.1-IB20080103144403111");
+  }
+
+
+  @Test(enabled = true)
+  public void testNoProjectDefinedInArtifact() throws Exception {
+    File cache = new File("target/test/deps");
+    FileTools.prune(cache);
+
+    Artifact noProject = new Artifact("org.savantbuild.test", "no-project", "no-project", "1.0", "jar");
+    ArtifactGroup group = new ArtifactGroup("run");
+    group.getArtifacts().add(noProject);
+
+    Dependencies d = new Dependencies();
+    d.getArtifactGroups().put("run", group);
+
+    DefaultOutput output = new DefaultOutput();
+    WorkflowHandler wh = new WorkflowHandler(new FetchWorkflowHandler(output), new PublishWorkflowHandler());
+    wh.getFetchWorkflowHandler().getProcesses().add(new URLProcessHandler(new DefaultOutput(), map("url", new File("test-deps/savant").toURI().toURL().toString())));
+    wh.getPublishWorkflowHandler().getProcesses().add(new CacheProcess(new DefaultOutput(), map("dir", "target/test/deps")));
+
+    ResolutionContext resolutionContext = new ResolutionContext();
+    GraphBuilder builder = new GraphBuilder(new DefaultOutput(), d, wh, true);
+    ArtifactGraph graph = builder.buildGraph(resolutionContext);
+
+    // Including the project node.
+    assertEquals(graph.getAllGraphNodesValues().size(), 6);
+  }
+
+  @Test(enabled = true)
+  public void testNoNameDefinedInArtifact() throws Exception {
+    File cache = new File("target/test/deps");
+    FileTools.prune(cache);
+
+    Artifact noProject = new Artifact("org.savantbuild.test", "no-name", "no-name", "1.0", "jar");
+    ArtifactGroup group = new ArtifactGroup("run");
+    group.getArtifacts().add(noProject);
+
+    Dependencies d = new Dependencies();
+    d.getArtifactGroups().put("run", group);
+
+    DefaultOutput output = new DefaultOutput();
+    WorkflowHandler wh = new WorkflowHandler(new FetchWorkflowHandler(output), new PublishWorkflowHandler());
+    wh.getFetchWorkflowHandler().getProcesses().add(new URLProcessHandler(new DefaultOutput(), map("url", new File("test-deps/savant").toURI().toURL().toString())));
+    wh.getPublishWorkflowHandler().getProcesses().add(new CacheProcess(new DefaultOutput(), map("dir", "target/test/deps")));
+
+    ResolutionContext resolutionContext = new ResolutionContext();
+    GraphBuilder builder = new GraphBuilder(new DefaultOutput(), d, wh, true);
+    ArtifactGraph graph = builder.buildGraph(resolutionContext);
+
+    // Including the project node.
+    assertEquals(graph.getAllGraphNodesValues().size(), 6);
   }
 }

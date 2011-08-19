@@ -33,9 +33,17 @@ public class Artifact {
   public Artifact() {
   }
 
+  /**
+   * Called for when compatibility is null
+   *
+   * @param group the group
+   * @param project the project
+   * @param name the name
+   * @param version the version
+   * @param type the type
+   */
   public Artifact(String group, String project, String name, String version, String type) {
-    this.id = new ArtifactID(group, project, name, type);
-    this.version = version;
+    this(group, project, name, version, type, null);
   }
 
   public Artifact(String group, String project, String name, String version, String type, String compatibility) {

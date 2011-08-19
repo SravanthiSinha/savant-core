@@ -23,7 +23,7 @@ package org.savantbuild.domain;
  * artifact usually determine the artifacts variant (such as version).
  * </p>
  *
- * @author Brian Pontarelli
+ * @author Brian Pontarelli and James Humphrey
  */
 public class ArtifactID {
   private String group;
@@ -34,11 +34,24 @@ public class ArtifactID {
   public ArtifactID() {
   }
 
-  public ArtifactID(String group, String project, String name, String type) {
+  /**
+   * Constructs an artifact id, which is composed of a group, project, name, and type
+   *
+   * @param group the artifact group
+   * @param project the artifact project
+   * @param name the artifact name
+   * @param type the artifact type
+   * @throws IllegalArgumentException thrown if both name and project are empty string or null
+   */
+  public ArtifactID(String group, String project, String name, String type) throws IllegalArgumentException {
     this.group = group;
-    this.project = project;
-    this.name = name;
+    this.project = project == null ? name : project;
+    this.name = name == null ? project : name;
     this.type = type;
+
+    if ( (project == null || project.length() == 0) && (name == null || name.length() == 0)) {
+      throw new IllegalArgumentException("artifact project and name undefined");
+    }
   }
 
   public String getGroup() {
