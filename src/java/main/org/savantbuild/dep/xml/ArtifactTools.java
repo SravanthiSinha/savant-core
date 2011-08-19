@@ -15,8 +15,6 @@
  */
 package org.savantbuild.dep.xml;
 
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,6 +22,8 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
 import org.savantbuild.BuildException;
 import org.savantbuild.domain.Artifact;
@@ -134,8 +134,13 @@ public class ArtifactTools {
         group = new ArtifactGroup(type);
         dependencies.getArtifactGroups().put(type, group);
       } else if (qName.equals("artifact")) {
-        Artifact artifact = new Artifact(attributes.getValue("group"), attributes.getValue("project"),
-          attributes.getValue("name"), attributes.getValue("version"), attributes.getValue("type"));
+        Artifact artifact;
+        try {
+          artifact = new Artifact(attributes.getValue("group"), attributes.getValue("project"),
+            attributes.getValue("name"), attributes.getValue("version"), attributes.getValue("type"));
+        } catch (IllegalArgumentException e) {
+          throw new BuildException(e);
+        }
         group.getArtifacts().add(artifact);
       } else {
         throw new SAXException("Invalid element encountered in AMD file [" + qName + "]. You might need to upgrade " +

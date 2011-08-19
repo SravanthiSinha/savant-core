@@ -17,6 +17,7 @@ package org.savantbuild.run.guice;
 
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.PosixParser;
+import org.savantbuild.dep.ant.ArtifactCopyTask;
 import org.savantbuild.dep.ant.DependencyPathTask;
 import org.savantbuild.dep.version.ArtifactVersionTools;
 import org.savantbuild.domain.Context;
@@ -47,6 +48,7 @@ public class SavantModule extends AbstractModule {
 
     requestStaticInjection(ArtifactVersionTools.class);
     requestStaticInjection(DependencyPathTask.class);
+    requestStaticInjection(ArtifactCopyTask.class);
     requestStaticInjection(GroovyTools.class);
   }
 }

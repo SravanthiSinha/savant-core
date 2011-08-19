@@ -188,4 +188,23 @@ public class FileTools {
       entry = jis.getNextJarEntry();
     }
   }
+
+    /**
+     * Finds the root file (the parent directory) of the given file.
+     *
+     * @param   file The file to find the parent of.
+     * @return The parent.
+     */
+    public static File getRoot(File file) {
+        File parent = file;
+        while (true) {
+            File tempParent = parent.getParentFile();
+            if (tempParent == null) {
+                break;
+            } else {
+                parent = tempParent;
+            }
+        }
+        return parent;
+    }
 }
