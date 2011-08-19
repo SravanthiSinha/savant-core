@@ -33,10 +33,8 @@ import com.google.inject.Inject;
 import static java.util.Arrays.*;
 
 /**
- * <p>
  * This class is the dependency path task that helps integration the Savant dependency management
  * system with Ant.
- * </p>
  *
  * @author Brian Pontarelli
  */
