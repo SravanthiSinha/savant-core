@@ -1,3 +1,7 @@
+import org.savantbuild.dep.tools.ArtifactFileTools
+import static org.savantbuild.util.CollectionTools.map
+import org.savantbuild.dep.ant.DependencyPathTask
+
 /*
 * Copyright (c) 2001-2011, Inversoft, All Rights Reserved
 *
@@ -35,5 +39,29 @@ project(group: "savant.inversoft.org", name: "savant-core", version: "2.0-A2") {
       artifact(group: "org.easymock", name: "easymock", version: "2.3")
       artifact(group: "org.testng", name: "testng", version: "5.11")
     }
+  }
+}
+
+target("pkg").post << {
+
+  ant.delete(dir: "target/dist")
+  ant.copy(todir: "target/dist/bin") {
+    ant.fileset(dir: "src/scripts/main", includes: "*")
+  }
+  ant.chmod(perm: "+x", file: "target/dist/bin/sb")
+  ant.copy(todir: "target/dist/lib") {
+    ant.fileset(dir: "target/jars", includes: "*")
+  }
+
+  ArtifactFileTools tools;
+
+  ant.artifactcopy(todir: "target/dist/lib", flatten: "true", types: "compile,run")
+  ant.tar(tarfile: "target/savant-${project.version}.tar.gz", compression: "gzip") {
+    ant.tarfileset(prefix: "savant-${project.version}", dir: "target/dist", includes: "**/*", excludes: "bin/svnt")
+    ant.tarfileset(mode: "755", prefix: "savant-${project.version}", dir: "target/dist")
+  }
+  ant.zip(zipfile: "target/savant-${project.version}.zip") {
+    ant.zipfileset(prefix: "savant-${project.version}", dir: "target/dist", includes: "**/*")
+    ant.zipfileset(filemode: "755", prefix: "savant-${project.version}", dir: "target/dist")
   }
 }

@@ -64,6 +64,7 @@ public class GroovyTools {
 
       AntBuilder ant = new AntBuilder();
       ant.invokeMethod("taskdef", map("name", "dependencypath", "classname", "org.savantbuild.dep.ant.DependencyPathTask"));
+      ant.invokeMethod("taskdef", map("name", "artifactcopy", "classname", "org.savantbuild.dep.ant.ArtifactCopyTask"));
 
       Binding binding = new Binding();
       binding.setVariable("ant", ant);

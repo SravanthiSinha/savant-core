@@ -35,6 +35,7 @@ import org.savantbuild.domain.Context;
 import org.savantbuild.domain.Dependencies;
 import org.savantbuild.domain.Workflow;
 import org.savantbuild.io.FileTools;
+import org.savantbuild.run.output.Output;
 
 import com.google.inject.Inject;
 
@@ -64,11 +65,13 @@ public class ArtifactCopyTask extends Copy {
 
   private static DependencyManager manager;
   private static Context context;
+  private static Output output;
 
   @Inject
-  public static void initialize(DependencyManager manager, Context context) {
+  public static void initialize(DependencyManager manager, Context context, Output output) {
     ArtifactCopyTask.manager = manager;
     ArtifactCopyTask.context = context;
+    ArtifactCopyTask.output = output;
   }
 
   public void setDependencies(String dependencies) {

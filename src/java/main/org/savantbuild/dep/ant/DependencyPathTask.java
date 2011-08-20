@@ -28,6 +28,7 @@ import org.savantbuild.domain.Artifact;
 import org.savantbuild.domain.Context;
 import org.savantbuild.domain.Dependencies;
 import org.savantbuild.domain.Workflow;
+import org.savantbuild.run.output.Output;
 
 import com.google.inject.Inject;
 import static java.util.Arrays.*;
@@ -41,6 +42,7 @@ import static java.util.Arrays.*;
 public class DependencyPathTask extends Task {
   private static DependencyManager manager;
   private static Context context;
+  private static Output output;
 
   private String id;
   private String dependencies;
@@ -48,9 +50,10 @@ public class DependencyPathTask extends Task {
   private boolean transitive = true;
 
   @Inject
-  public static void initialize(DependencyManager manager, Context context) {
+  public static void initialize(DependencyManager manager, Context context, Output output) {
     DependencyPathTask.manager = manager;
     DependencyPathTask.context = context;
+    DependencyPathTask.output = output;
   }
 
   public void setDependencies(String dependencies) {
