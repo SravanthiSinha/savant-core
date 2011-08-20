@@ -17,7 +17,7 @@ import org.savantbuild.dep.ant.DependencyPathTask
 * either express or implied. See the License for the specific
 * language governing permissions and limitations under the License.
 */
-project(group: "savant.inversoft.org", name: "savant-core", version: "2.0-A2") {
+project(group: "org.savantbuild", name: "savant-core", version: "2.0-A2") {
 
   plugin(group: "org.savantbuild.plugins", name: "clean", version: "0.1")
   plugin(group: "org.savantbuild.plugins", name: "java", version: "0.1-{integration}", settings: ["jdk.version": "1.6"])
@@ -52,8 +52,6 @@ target("pkg").post << {
   ant.copy(todir: "target/dist/lib") {
     ant.fileset(dir: "target/jars", includes: "*")
   }
-
-  ArtifactFileTools tools;
 
   ant.artifactcopy(todir: "target/dist/lib", flatten: "true", types: "compile,run")
   ant.tar(tarfile: "target/savant-${project.version}.tar.gz", compression: "gzip") {
