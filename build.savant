@@ -20,7 +20,7 @@ import org.savantbuild.dep.ant.DependencyPathTask
 project(group: "org.savantbuild", name: "savant-core", version: "2.0-A2") {
 
   def jdkVersion = 1.6;
-  def debug = "on";
+  def debug = "off";
 
   plugin(group: "org.savantbuild.plugins", name: "clean", version: "0.1")
   plugin(group: "org.savantbuild.plugins", name: "ide", version: "0.1-{integration}")
