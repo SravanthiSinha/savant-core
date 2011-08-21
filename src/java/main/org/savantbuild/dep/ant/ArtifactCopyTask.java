@@ -20,8 +20,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.taskdefs.Copy;
@@ -100,9 +98,6 @@ public class ArtifactCopyTask extends Copy {
    * Performs the copy of all the artifacts.
    */
   public void execute() {
-    Logger savantLog = Logger.getLogger("org.savantbuild");
-    Level oldLevel = savantLog.getLevel();
-    savantLog.setLevel(Level.SEVERE);
 
     CopyListener copyListener = new CopyListener();
     try {
@@ -113,13 +108,13 @@ public class ArtifactCopyTask extends Copy {
       }
 
       Workflow workflow = manager.determineProjectWorkflow(context.getWorkflows(), context.getProject());
-      Dependencies deps = context.getProject().getDependencies().get(dependencies);
 
+      Dependencies deps = context.getProject().getDependencies().get(dependencies);
+      deps.setGraph(null);
       manager.getResolver().resolve(deps, workflow, artifactGroupTypes, transitive, copyListener);
+
     } catch (Exception e) {
       throw new BuildException(e);
-    } finally {
-      savantLog.setLevel(oldLevel);
     }
 
     if (copyListener.added) {

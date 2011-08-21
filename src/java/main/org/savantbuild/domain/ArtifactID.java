@@ -47,7 +47,7 @@ public class ArtifactID {
     this.group = group;
     this.project = project == null ? name : project;
     this.name = name == null ? project : name;
-    this.type = type;
+    this.type = type == null ? "jar" : type;
 
     if ( (project == null || project.length() == 0) && (name == null || name.length() == 0)) {
       throw new IllegalArgumentException("artifact project and name undefined");

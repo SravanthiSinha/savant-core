@@ -19,9 +19,13 @@ import org.savantbuild.dep.ant.DependencyPathTask
 */
 project(group: "org.savantbuild", name: "savant-core", version: "2.0-A2") {
 
+  def jdkVersion = 1.6;
+  def debug = "on";
+
   plugin(group: "org.savantbuild.plugins", name: "clean", version: "0.1")
-  plugin(group: "org.savantbuild.plugins", name: "java", version: "0.1-{integration}", settings: ["jdk.version": "1.6"])
-  plugin(group: "org.savantbuild.plugins", name: "testng", version: "0.1-{integration}", settings: ["jdk.version": "1.6"])
+  plugin(group: "org.savantbuild.plugins", name: "ide", version: "0.1-{integration}")
+  plugin(group: "org.savantbuild.plugins", name: "java", version: "0.1-{integration}", settings: ["jdk.version": jdkVersion, "java.debug": debug])
+  plugin(group: "org.savantbuild.plugins", name: "testng", version: "0.1-{integration}", settings: ["jdk.version": jdkVersion])
 
   dependencies {
     artifactGroup("compile") {
@@ -53,7 +57,11 @@ target("pkg").post << {
     ant.fileset(dir: "target/jars", includes: "*")
   }
 
-  ant.artifactcopy(todir: "target/dist/lib", flatten: "true", types: "compile,run")
+  try {
+    ant.artifactcopy(todir: "target/dist/lib", flatten: "true", types: "compile", transitive: true)
+  } catch (Exception e) {
+    e.printStackTrace();
+  }
   ant.tar(tarfile: "target/savant-${project.version}.tar.gz", compression: "gzip") {
     ant.tarfileset(prefix: "savant-${project.version}", dir: "target/dist", includes: "**/*", excludes: "bin/svnt")
     ant.tarfileset(mode: "755", prefix: "savant-${project.version}", dir: "target/dist")

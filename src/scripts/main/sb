@@ -18,4 +18,4 @@ if [[ $(uname -a | grep -i cygwin) != "" ]]; then
   SAVANT_HOME=$(cygpath -wa $SAVANT_HOME)
 fi
 
-java -cp $CLASSPATH org.savantbuild.run.Main $@
+java $SAVANT_OPTS -cp $CLASSPATH org.savantbuild.run.Main $@
