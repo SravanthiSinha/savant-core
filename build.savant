@@ -17,7 +17,7 @@ import org.savantbuild.dep.ant.DependencyPathTask
 * either express or implied. See the License for the specific
 * language governing permissions and limitations under the License.
 */
-project(group: "org.savantbuild", name: "savant-core", version: "2.0-A2") {
+project(group: "org.savantbuild", name: "savant-core", version: "2.0-B1") {
 
   def jdkVersion = 1.6;
   def debug = "off";
