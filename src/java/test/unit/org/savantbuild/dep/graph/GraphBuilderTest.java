@@ -278,7 +278,7 @@ public class GraphBuilderTest {
     // Including the project node.
     assertEquals(graph.getAllGraphNodesValues().size(), 3);
 
-    Artifact integration = new Artifact("org.savantbuild.test", "", "integration-build", "2.1.1-{integration}", "jar");
+    Artifact integration = new Artifact("org.savantbuild.test", "integration-build", "integration-build", "2.1.1-{integration}", "jar");
     Dependencies artDeps = graph.getDependencies(a);
     assertEquals(artDeps.getArtifactGroups().size(), 1);
     assertEquals(artDeps.getAllArtifacts().size(), 1);
