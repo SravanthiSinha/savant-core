@@ -34,10 +34,8 @@ import com.google.inject.Inject;
 import groovy.lang.Closure;
 
 /**
- * <p>
- * This class is the default target executor. It handles local and plugin targets, target
- * dependencies, target argument parsing, target help output.
- * </p>
+ * This class is the default target executor. It handles local and plugin targets, target dependencies, target argument
+ * parsing, target help output.
  *
  * @author Brian Pontarelli
  */

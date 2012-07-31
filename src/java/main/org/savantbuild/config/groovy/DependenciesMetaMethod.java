@@ -23,13 +23,10 @@ import groovy.lang.Closure;
 import static org.savantbuild.util.StringTools.*;
 
 /**
- * <p>
  * This class is the Groovy MetaMethod that handles the dependency information.
- * </p>
  *
  * @author Brian Pontarelli
  */
-@SuppressWarnings("unchecked")
 public class DependenciesMetaMethod extends AbstractMetaMethod {
   // Package protected reference to the current dependencies.
   static Dependencies current;

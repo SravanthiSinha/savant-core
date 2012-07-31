@@ -20,10 +20,7 @@ import java.io.File;
 import org.apache.commons.cli.CommandLine;
 
 /**
- * <p>
- * This is the main context that is created when the build starts and passed
- * through the entire build process.
- * </p>
+ * This is the main context that is created when the build starts and passed through the entire build process.
  *
  * @author Brian Pontarelli
  */

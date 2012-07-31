@@ -23,9 +23,7 @@ import org.savantbuild.domain.Process;
 import groovy.lang.Closure;
 
 /**
- * <p>
  * This class is the Groovy MetaMethod that handles the publish processes information.
- * </p>
  *
  * @author Brian Pontarelli
  */

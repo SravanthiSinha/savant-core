@@ -21,9 +21,7 @@ import org.savantbuild.domain.Project;
 import groovy.lang.Closure;
 
 /**
- * <p>
  * This class is the Groovy MetaMethod that handles the plugin init call.
- * </p>
  *
  * @author Brian Pontarelli
  */

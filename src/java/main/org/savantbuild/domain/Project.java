@@ -23,9 +23,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <p>
  * This class defines the project.
- * </p>
  *
  * @author Brian Pontarelli
  */

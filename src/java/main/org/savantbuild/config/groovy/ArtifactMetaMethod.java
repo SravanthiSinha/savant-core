@@ -24,13 +24,10 @@ import org.savantbuild.domain.ArtifactGroup;
 import static org.savantbuild.util.StringTools.*;
 
 /**
- * <p>
  * This class is the Groovy MetaMethod that handles the dependency information.
- * </p>
  *
  * @author Brian Pontarelli
  */
-@SuppressWarnings("unchecked")
 public class ArtifactMetaMethod extends AbstractMetaMethod {
   private static final String MESSAGE = "Invalid artifact definition. You must specify the group, name, and version of the " +
     "artifact like this:\n" +

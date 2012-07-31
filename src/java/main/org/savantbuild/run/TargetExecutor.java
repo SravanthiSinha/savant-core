@@ -23,10 +23,7 @@ import org.savantbuild.domain.Project;
 import com.google.inject.ImplementedBy;
 
 /**
- * <p>
- * This interface defines how targets are executed by Savant. This handles target dependencies,
- * arguments, etc.
- * </p>
+ * This interface defines how targets are executed by Savant. This handles target dependencies, arguments, etc.
  *
  * @author Brian Pontarelli
  */

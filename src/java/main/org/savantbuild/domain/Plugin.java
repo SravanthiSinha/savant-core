@@ -16,9 +16,7 @@
 package org.savantbuild.domain;
 
 /**
- * <p>
  * This class defines a plugin.
- * </p>
  *
  * @author Brian Pontarelli
  */

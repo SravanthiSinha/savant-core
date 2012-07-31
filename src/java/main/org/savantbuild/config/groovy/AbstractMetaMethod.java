@@ -23,9 +23,7 @@ import org.codehaus.groovy.reflection.ClassInfo;
 import groovy.lang.MetaMethod;
 
 /**
- * <p>
  * This class is an abstract meta method for the Groovy DSL support.
- * </p>
  *
  * @author Brian Pontarelli
  */

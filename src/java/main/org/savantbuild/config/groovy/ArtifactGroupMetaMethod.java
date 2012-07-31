@@ -22,13 +22,10 @@ import org.savantbuild.domain.Dependencies;
 import groovy.lang.Closure;
 
 /**
- * <p>
  * This class is the Groovy MetaMethod that handles the dependency information.
- * </p>
  *
  * @author Brian Pontarelli
  */
-@SuppressWarnings("unchecked")
 public class ArtifactGroupMetaMethod extends AbstractMetaMethod {
   // Package protected reference to the current artifactGroup.
   static ArtifactGroup current;

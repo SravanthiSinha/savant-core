@@ -22,9 +22,7 @@ import org.savantbuild.BuildException;
 import org.savantbuild.domain.Process;
 
 /**
- * <p>
  * This class is the Groovy MetaMethod that handles the process information.
- * </p>
  *
  * @author Brian Pontarelli
  */

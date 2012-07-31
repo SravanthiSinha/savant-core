@@ -25,9 +25,7 @@ import org.savantbuild.domain.Workflows;
 import groovy.lang.Closure;
 
 /**
- * <p>
  * This class is the Groovy MetaMethod that handles the integration publish workflow definition.
- * </p>
  *
  * @author Brian Pontarelli
  */

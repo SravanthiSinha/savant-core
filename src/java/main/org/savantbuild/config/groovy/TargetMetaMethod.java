@@ -30,10 +30,8 @@ import org.savantbuild.domain.Targetable;
 import org.savantbuild.run.TargetExecutor;
 
 /**
- * <p>
- * This class is the Groovy MetaMethod that handles the creation of new targets within the
- * Context as the build file is executed (parsed).
- * </p>
+ * This class is the Groovy MetaMethod that handles the creation of new targets within the Context as the build file is
+ * executed (parsed).
  *
  * @author Brian Pontarelli
  */

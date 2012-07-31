@@ -25,13 +25,10 @@ import org.savantbuild.domain.Workflows;
 import groovy.lang.Closure;
 
 /**
- * <p>
  * This class is the Groovy MetaMethod that handles the release publish workflow definition.
- * </p>
  *
  * @author Brian Pontarelli
  */
-@SuppressWarnings("unchecked")
 public class ReleaseWorkflowMetaMethod extends AbstractMetaMethod {
   // Package protected reference to the current workflow
   static List<Process> current;

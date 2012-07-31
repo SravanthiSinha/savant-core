@@ -19,9 +19,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * <p>
  * This class provides the default implementation of the Targetable methods.
- * </p>
  *
  * @author Brian Pontarelli
  */

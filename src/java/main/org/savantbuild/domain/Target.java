@@ -27,9 +27,7 @@ import org.apache.commons.cli.Options;
 import groovy.lang.Closure;
 
 /**
- * <p>
  * This class defines a target within the build file.
- * </p>
  *
  * @author Brian Pontarelli
  */

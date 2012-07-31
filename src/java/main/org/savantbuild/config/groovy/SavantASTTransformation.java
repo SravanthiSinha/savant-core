@@ -38,10 +38,8 @@ import org.codehaus.groovy.transform.GroovyASTTransformation;
 import com.google.inject.Inject;
 
 /**
- * <p>
- * This class is a Groovy AST transformation that Savant uses to convert local Script variables to
- * fields inside the Script class.
- * </p>
+ * This class is a Groovy AST transformation that Savant uses to convert local Script variables to fields inside the
+ * Script class.
  *
  * @author Brian Pontarelli
  */
@@ -60,13 +58,13 @@ public class SavantASTTransformation implements ASTTransformation {
 
     List<MethodNode> methods = mainClass.getMethods();
     for (MethodNode method : methods) {
-      if (!method.getName().equals("run")) {
+      if (!method.getName().equals("run") && !mainClass.getSuperClass().getName().equals("")) {
         continue;
       }
 
       BlockStatement block = (BlockStatement) method.getCode();
       List<Statement> statements = block.getStatements();
-      for (Iterator<Statement> i = statements.iterator(); i.hasNext();) {
+      for (Iterator<Statement> i = statements.iterator(); i.hasNext(); ) {
         Statement statement = i.next();
         ExpressionStatement exprStmt = (ExpressionStatement) statement;
         Expression expr = exprStmt.getExpression();

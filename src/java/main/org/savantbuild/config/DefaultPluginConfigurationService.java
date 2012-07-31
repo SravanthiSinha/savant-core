@@ -44,9 +44,7 @@ import groovy.lang.MetaClass;
 import static org.savantbuild.util.CollectionTools.*;
 
 /**
- * <p>
  * This class is the default plugin configuration service.
- * </p>
  *
  * @author Brian Pontarelli
  */

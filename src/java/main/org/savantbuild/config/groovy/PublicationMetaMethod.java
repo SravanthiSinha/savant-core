@@ -24,13 +24,10 @@ import org.savantbuild.domain.Publication;
 import static org.savantbuild.util.StringTools.*;
 
 /**
- * <p>
  * This class is the Groovy MetaMethod that handles the publications.
- * </p>
  *
  * @author Brian Pontarelli
  */
-@SuppressWarnings("unchecked")
 public class PublicationMetaMethod extends AbstractMetaMethod {
   private static final String MESSAGE = "Invalid publication definition. You must specify the name, type and file of the " +
     "publication like this:\n" +

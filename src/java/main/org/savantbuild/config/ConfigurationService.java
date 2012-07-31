@@ -20,10 +20,7 @@ import org.savantbuild.domain.Context;
 import com.google.inject.ImplementedBy;
 
 /**
- * <p>
- * This interface defines how configuration is loaded from the Savant build and workflow
- * files.
- * </p>
+ * This interface defines how configuration is loaded from the Savant build and workflow files.
  *
  * @author Brian Pontarelli
  */

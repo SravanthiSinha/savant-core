@@ -24,9 +24,7 @@ import org.savantbuild.run.TargetExecutor;
 import groovy.lang.MetaClassImpl;
 
 /**
- * <p>
  * This is the meta class that supports the Savant Build File DSL.
- * </p>
  *
  * @author Brian Pontarelli
  */

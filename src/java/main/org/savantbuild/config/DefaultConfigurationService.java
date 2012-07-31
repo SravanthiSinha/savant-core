@@ -42,10 +42,7 @@ import static java.util.Collections.*;
 import static org.savantbuild.util.CollectionTools.*;
 
 /**
- * <p>
- * This class loads the build script and uses Groovy Meta-Programming to setup
- * the targets, build graph, etc.
- * </p>
+ * This class loads the build script and uses Groovy Meta-Programming to setup the targets, build graph, etc.
  *
  * @author Brian Pontarelli
  */

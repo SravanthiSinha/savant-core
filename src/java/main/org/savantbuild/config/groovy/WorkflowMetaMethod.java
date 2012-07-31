@@ -22,13 +22,10 @@ import org.savantbuild.domain.Workflows;
 import groovy.lang.Closure;
 
 /**
- * <p>
  * This class is the Groovy MetaMethod that handles the workflow information.
- * </p>
  *
  * @author Brian Pontarelli
  */
-@SuppressWarnings("unchecked")
 public class WorkflowMetaMethod extends AbstractMetaMethod {
   // Package protected reference to the current workflow
   static Workflow current;

@@ -30,13 +30,10 @@ import org.savantbuild.domain.Project;
 import static org.savantbuild.util.StringTools.*;
 
 /**
- * <p>
  * This class is the Groovy MetaMethod that handles the publications.
- * </p>
  *
  * @author Brian Pontarelli
  */
-@SuppressWarnings("unchecked")
 public class PluginMetaMethod extends AbstractMetaMethod {
   private static final String MESSAGE = "Invalid plugin definition. You must specify the group, name, and version of the " +
     "plugin like this:\n" +

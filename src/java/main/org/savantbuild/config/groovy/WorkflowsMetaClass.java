@@ -20,9 +20,7 @@ import org.savantbuild.domain.Workflows;
 import groovy.lang.MetaClassImpl;
 
 /**
- * <p>
  * This is the meta class that supports the Savant Workflows DSL.
- * </p>
  *
  * @author Brian Pontarelli
  */

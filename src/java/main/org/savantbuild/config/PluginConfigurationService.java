@@ -25,9 +25,7 @@ import org.savantbuild.domain.Project;
 import com.google.inject.ImplementedBy;
 
 /**
- * <p>
  * This interface defines how plugins are loaded configured within the project.
- * </p>
  *
  * @author Brian Pontarelli
  */
